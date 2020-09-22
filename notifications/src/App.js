@@ -31,7 +31,7 @@ class App extends React.Component {
        </Navbar>
        <Router>
             <Switch> 
-              <Route exact path='/home' component={Home}></Route> 
+              <Route exact path='/' component={Home}></Route> 
               <Route exact path='/notifications' component={Notification}></Route>
             </Switch> 
       </Router>
