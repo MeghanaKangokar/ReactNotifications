@@ -23,8 +23,8 @@ class App extends React.Component {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <Nav.Link href="/notifications" ref={this.badge}>
-              <div>{this.state.count}</div>
-              <BellIcon width='40' active={false} animate={false}/>
+              <div className="count">{this.state.count}</div>
+              <BellIcon width='25' active={false} animate={false}/>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
@@ -37,6 +37,41 @@ class App extends React.Component {
       </Router>
       </div>
     );
+  }
+
+  componentDidMount() {
+    this.getNotifications();
+ }
+
+  getNotifications = () => {
+    this.fetchNotifications().then(result => {
+      if (!(!result)) {
+       var count = 0;
+       result.filter((item) => {
+         if(!item.read) {
+           count++;
+         }
+         return true;
+       });
+       this.setState({
+         count: count
+       });
+      }
+    });
+  }
+
+  async fetchNotifications() {
+    return await fetch('http://localhost:4000/api')
+      .then(res => res.json())
+      .then(res => {
+        if (res.error) {
+          throw (res.error);
+        }
+        return res;
+      })
+      .catch(error => {
+        console.log(error);
+      })
   }
 }
 

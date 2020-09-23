@@ -14,6 +14,16 @@ notificationRoute.route('/create').post((req, res, next) => {
   })
 });
 
+notificationRoute.route('/read').get((req, res, next) => {
+    Notification.updateMany({"read":false}, {"$set":{"read": true}}, (error,data) => {
+        if (error) {
+          return next(error)
+        } else {
+          res.json(data)
+        }
+    });
+});
+
 notificationRoute.route('/').get((req, res) => {
     Notification.find((error, data) => {
     if (error) {
@@ -22,7 +32,8 @@ notificationRoute.route('/').get((req, res) => {
       res.json(data)
     }
   })
-})
+});
+
 
 // Get single employee
 // employeeRoute.route('/read/:id').get((req, res) => {

@@ -5,8 +5,7 @@ class Home extends React.Component {
         return (
             <div>
                 <div className="nextEvent">
-                    <h2>UPCOMING NEXT</h2>
-                    <span>STARLINK MISSION</span>
+                    <h2>Welcome!</h2>
                 </div>
             </div>
 
